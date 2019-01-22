@@ -5,6 +5,7 @@ const cors       = require('cors');
 
 const user	 = require('./routes/userRoute');
 const order  = require('./routes/orderRoute');
+const menu   = require('./routes/menuRoute');
 
 const app = express();
 
@@ -19,14 +20,12 @@ app.use(function (req, res, next) {
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', '*');
 
-    // Request methods you wish to allow
+    // Request methods to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
-    // Request headers you wish to allow
+    // Request headers to allow
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 
-    // Set to true if you need the website to include cookies in the requests sent
-    // to the API 
    res.setHeader('Access-Control-Allow-Credentials', true);
   // res.setHeader('Access-Control-Expose-Headers', 5);
 
@@ -36,6 +35,7 @@ app.use(function (req, res, next) {
 
 app.use('/users',user);
 app.use('/orderList',order);
+app.use('/menus',menu);
 
 const hostname = '127.0.0.1';
 const port = 8080;
