@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var moment = require('moment');
 var Order = require('../models/orderList');
 
 
@@ -10,7 +11,6 @@ router.get('/', function (req, res, next) {
         }
         else {
             Order.totalOrderList((error, totalCountPackt) => {
-                //console.log('totalCountPackt', JSON.stringify(totalCountPackt), totalCountPackt);
                 if (error) {
                     res.json(error);
                 }
@@ -41,7 +41,6 @@ router.get('/:id?', function (req, res, next) {
             order.forEach(OR => {
                 OR.id = OR.orderId;
             });
-            console.log("order is ",order);
             res.json(order[0]);
         }
     });
@@ -49,6 +48,7 @@ router.get('/:id?', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
+    
     Order.getMaxOrderId(function (err, maxOrder) {
         if (err) {
             res.json(err);
@@ -56,14 +56,16 @@ router.post('/', function (req, res, next) {
         else {
             var lastId = maxOrder[0]['max(orderId)'];
             var lastDigit = Number(lastId.slice(-2));
-            var newId = "OR"+ (lastDigit + 1);
+            var newId = "ORDER "+ (lastDigit + 1);
             req.body.orderId = newId;
+            req.body.created = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
 
             Order.addOrderList(req.body,function(error,order){
                 if(error){
                     res.json(error);
                 }
                 else{
+                    console.log("request bosy is ",req.body);
                     res.json(req.body);
                 }
             })
@@ -73,21 +75,22 @@ router.post('/', function (req, res, next) {
 });
 
 router.delete('/:id', function (req, res, next) {
-
+    
     Order.deleteOrderList(req.params.id, function (err, order) {
 
         if (err) {
             res.json(err);
         }
         else {
-            order.id = order.orderId;
-            res.json(order);
+            req.body.id = req.body.orderId;
+            res.json({id:req.params.id});
         }
 
     });
 });
 
 router.put('/:id', function (req, res, next) {
+    req.body.created  = req.body.created.slice(0,-5).replace('T', ' ');;
 
     Order.updateOrderList(req.params.id, req.body, function (err, order) {
 
@@ -95,8 +98,7 @@ router.put('/:id', function (req, res, next) {
             res.json(err);
         }
         else {
-            order.id = order.orderId;
-            res.json(order);
+            res.json(req.body);
         }
     });
 });

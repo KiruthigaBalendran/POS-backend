@@ -1,7 +1,7 @@
 const express    = require('express');
 const mysql      = require('mysql');
 const bodyParser = require('body-parser');
-const cors         = require('cors');
+const cors       = require('cors');
 
 const user	 = require('./routes/userRoute');
 const order  = require('./routes/orderRoute');
@@ -26,7 +26,7 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 
     // Set to true if you need the website to include cookies in the requests sent
-    // to the API (e.g. in case you use sessions)
+    // to the API 
    res.setHeader('Access-Control-Allow-Credentials', true);
   // res.setHeader('Access-Control-Expose-Headers', 5);
 
