@@ -4,6 +4,7 @@ var Menu = require('../models/menu');
 
 
 router.get('/', function (req, res, next) {
+
     Menu.getAllMenus(function (err, menus) {
         if (err) {
             res.json(err);
