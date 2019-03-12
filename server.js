@@ -1,9 +1,7 @@
 const express    = require('express');
-const mysql      = require('mysql');
 const bodyParser = require('body-parser');
 const cors       = require('cors');
 
-const user	 = require('./routes/userRoute');
 const order  = require('./routes/orderRoute');
 const menu   = require('./routes/menuRoute');
 
@@ -26,14 +24,12 @@ app.use(function (req, res, next) {
     // Request headers to allow
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 
-   res.setHeader('Access-Control-Allow-Credentials', true);
-  // res.setHeader('Access-Control-Expose-Headers', 5);
+    res.setHeader('Access-Control-Allow-Credentials', true);
 
     // Pass to next layer of middleware
     next();
 });
 
-app.use('/users',user);
 app.use('/orderList',order);
 app.use('/menus',menu);
 

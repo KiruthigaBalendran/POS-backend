@@ -1,4 +1,4 @@
-//reference of dbconnection.js
+//reference to dbconnection.js
 var db = require('../dbConnection'); 
 
 var order = {

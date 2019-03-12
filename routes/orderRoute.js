@@ -1,6 +1,6 @@
+//import the libraries
 var express = require('express');
 var router = express.Router();
-var moment = require('moment');
 var Order = require('../models/orderList');
 
 //GET orderList/
@@ -136,8 +136,6 @@ router.post('/:id?/menus', function (req, res, next) {
 
 // PUT /orderList{orderId}
 router.put('/:id', function (req, res, next) {
-    //req.body.created  = req.body.created.slice(0,-5).replace('T', ' ');;
-
     Order.updateOrderList(req.params.id, req.body, function (err, order) {
 
         if (err) {
@@ -151,8 +149,6 @@ router.put('/:id', function (req, res, next) {
 
 // PUT /orderList/{orderId}/menus/{menuId}
 router.put('/:orderId/menus/:menuId?', function (req, res, next) {
-    //req.body.created  = req.body.created.slice(0,-5).replace('T', ' ');;
-
     Order.updateMenuById(req.params.orderId,req.params.menuId, req.body, function (err, order) {
 
         if (err) {

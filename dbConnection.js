@@ -1,3 +1,4 @@
+//MySQL DB connection details 
 var mysql=require('mysql');
 var connection=mysql.createPool({
  
