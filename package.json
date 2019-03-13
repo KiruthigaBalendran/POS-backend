@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "node server.js"
   },
   "author": "Kiru",
@@ -17,5 +17,10 @@
     "moment": "^2.24.0",
     "mysql": "^2.16.0",
     "nodemon": "^1.18.9"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
+    "mocha": "^6.0.2"
   }
 }
